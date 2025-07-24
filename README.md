@@ -169,6 +169,10 @@ A documentação da API é gerada automaticamente e está disponível de forma i
 * **[http://localhost:8000/api/docs/](http://localhost:8000/api/docs/)**
 
 Nesta página, você pode visualizar todos os endpoints, modelos de dados e testar as requisições diretamente do seu navegador.
+para pegar seu token, use o superusuario :
+username = Lcuas
+password = Lguts123
+
 
 ## 10. Testes Feitos
 
