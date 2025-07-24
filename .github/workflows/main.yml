@@ -47,7 +47,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: sa-east-1 # IMPORTANTE: Mude para a sua região da AWS!
+          aws-region: sa-east-1
 
       - name: 3. Gerar o ficheiro .zip para deploy
         run: zip -r deploy.zip . -x ".git/*" ".github/*"
@@ -57,5 +57,6 @@ jobs:
         with:
           application_name: lacrei-saude-api # O nome da sua aplicação no EB
           environment_name: Lacrei-saude-api-env-2 # O nome do seu ambiente no EB
+          region: sa-east-1
           version_label: "v1.2.0-${{ github.sha }}" # Uma etiqueta de versão única
           deployment_package: deploy.zip
