@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "chave-padrao")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 if os.environ.get("AWS_EXECUTION_ENV"):
     ALLOWED_HOSTS.append(".elasticbeanstalk.com")
 
