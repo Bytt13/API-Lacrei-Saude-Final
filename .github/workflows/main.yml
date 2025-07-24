@@ -55,6 +55,8 @@ jobs:
       - name: 4. Enviar o pacote para o AWS Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: lacrei-saude-api # O nome da sua aplicação no EB
           environment_name: Lacrei-saude-api-env-2 # O nome do seu ambiente no EB
           region: sa-east-1
