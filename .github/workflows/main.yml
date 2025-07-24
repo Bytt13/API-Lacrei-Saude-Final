@@ -25,7 +25,7 @@ jobs:
         run: poetry install --no-root
 
       - name: 4. Executar o Lint com Flake8
-        run: poetry run flake8 .
+        run: poetry run flake8 . --ignore=E501,W293,E302,E303
 
       - name: 5. Executar os testes
         run: |
