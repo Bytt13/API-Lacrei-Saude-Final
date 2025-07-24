@@ -142,7 +142,7 @@ class ConsultaTests(APITestCase):
             profissional=outro_profissional, data_consulta=timezone.now()
         )
         base_url = reverse("consulta-list")
-        url = f"{base_url}?profissional_id={self.profissional.pk}"
+        url = f"{base_url}?profissional={self.profissional.pk}"
         response = self.client.get(url, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
