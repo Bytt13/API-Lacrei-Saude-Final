@@ -17,11 +17,12 @@ jobs:
       - name: 2. Configurar o Python e Poetry
         uses: actions/setup-python@v3
         with:
-          python-version: "3.9"
+          python-version: "3.12" # ATUALIZADO: Versão correta do Python para o projeto
       - uses: snok/install-poetry@v1
 
       - name: 3. Instalar as dependências
-        run: poetry install
+        # ATUALIZADO: Adicionado --no-root para instalar apenas as dependências, não o projeto em si.
+        run: poetry install --no-root
 
       - name: 4. Executar o Lint com Flake8
         run: poetry run flake8 .
