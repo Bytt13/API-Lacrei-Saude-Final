@@ -53,6 +53,6 @@ jobs:
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           application_name: lacrei-saude-api # O nome da sua aplicação no EB
-          environment_name: Lacrei-saude-api-env # O nome do seu ambiente no EB
+          environment_name: Lacrei-saude-api-env-2 # O nome do seu ambiente no EB
           version_label: "v1.2.0-${{ github.sha }}" # Uma etiqueta de versão única
           deployment_package: deploy.zip
