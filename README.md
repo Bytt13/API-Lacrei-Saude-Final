@@ -182,9 +182,13 @@ Para integrar um sistema de pagamentos como o Assas, a arquitetura seria:
 
 ## 10. Documentação da API e Deploy(Swagger)
 
-A documentação da API é gerada automaticamente e está disponível de forma interativa. Após iniciar o servidor, acesse o seguinte endpoint, utilizando o link gerado pelo Deploy na AWS:
+A documentação da API é gerada automaticamente e está disponível de forma interativa. Acesse o seguinte endpoint, utilizando o link gerado pelo Deploy na AWS:
 
-* **[http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs/](http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs)**
+* **[http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs/](http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs)** *
+
+**Para Acessar os outros endpoints, utilize eles, após o link do deploy**
+http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com
+
 
 Nesta página, você pode visualizar todos os endpoints, modelos de dados e testar as requisições diretamente do seu navegador.
 para ser autorizado, utilize o token: ef6319df50808891dee08f7caf539f43ca8aa62e
