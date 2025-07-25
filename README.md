@@ -166,18 +166,7 @@ Se, após a troca, a nova versão apresentar um bug que não foi pego nos testes
 * **Custo:** Manter dois ambientes de produção idênticos pode duplicar os custos de infraestrutura.
 * **Complexidade:** Requer uma configuração mais avançada do balanceador de carga e do pipeline de deploy.
 
-
-### Estratégia Sugerida: Blue/Green Deployment
-
 O AWS Elastic Beanstalk suporta nativamente o deploy Blue/Green.
-
-**Como funciona:**
-
-* **Ambiente Blue:** O ambiente de produção atual, recebendo todo o tráfego.
-* **Deploy no Ambiente Green:** O pipeline de CD, em vez de atualizar o ambiente Blue, provisiona um novo ambiente idêntico (Green) com a nova versão da aplicação.
-* **Validação:** Testes podem ser executados no ambiente Green para garantir que tudo está funcionando como esperado antes de liberar para os usuários.
-* **Swap de URL:** Com um clique (ou comando de API), o Elastic Beanstalk troca as URLs. O tráfego é instantaneamente redirecionado para o ambiente Green, que se torna o novo Blue.
-* **Rollback Imediato:** Se um problema for detectado, o rollback é feito simplesmente trocando a URL de volta para o ambiente Blue original, que foi mantido intacto. É uma operação quase instantânea e sem risco.
 
 ## 9. Proposta de Integração com a Assas
 
@@ -198,9 +187,7 @@ A documentação da API é gerada automaticamente e está disponível de forma i
 * **[http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs/](http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs)**
 
 Nesta página, você pode visualizar todos os endpoints, modelos de dados e testar as requisições diretamente do seu navegador.
-para pegar seu token, use o superusuario :
-username = Lcuas
-password = Lguts123
+para ser autorizado, utilize o token: ef6319df50808891dee08f7caf539f43ca8aa62e
 
 # 11. Pipeline CI/CD
 
