@@ -134,9 +134,38 @@ O projeto é organizado de forma a separar claramente as responsabilidades:
 
 Essa estrutura modular torna o projeto mais fácil de navegar, testar e escalar. Se a API crescer, podemos facilmente adicionar novos apps ou quebrar o app `api` em apps menores e mais especializados.
 
-## 8. Proposta de Rollback Funcional
+## 8. Estratégia de Rollback Funcional
 
-A estratégia de deploy pode ser melhorada para permitir rollbacks mais seguros e rápidos.
+Manter a estabilidade da aplicação é crucial. Se uma nova versão introduz um bug crítico, precisamos de um plano para reverter para a versão anterior de forma rápida e segura. Abaixo estão detalhadas duas estratégias de rollback, da mais simples à mais robusta.
+
+### Estratégia Escolhida: Blue/Green Deployment (O Padrão Ouro "Zero Downtime")
+
+Esta é a abordagem mais profissional e segura, ideal para aplicações críticas onde o tempo de inatividade é inaceitável. Ela envolve manter dois ambientes de produção idênticos.
+
+* **Ambiente Blue:** A versão estável atual que está recebendo 100% do tráfego dos usuários.
+* **Ambiente Green:** Um ambiente idêntico, porém inativo, que serve como "palco" para a nova versão.
+
+**Fluxo de Deploy:**
+
+1.  **Deploy no Ambiente Green:** O pipeline de CI/CD, em vez de atualizar o ambiente Blue, implanta a nova versão do código no ambiente Green.
+2.  **Testes em Produção (Seguros):** Com o ambiente Green no ar, mas sem receber tráfego de usuários, podemos rodar testes de fumaça (smoke tests) e testes de integração contra uma infraestrutura real (incluindo uma cópia recente do banco de dados de produção). Isso garante que a nova versão funciona no "mundo real".
+3.  **Troca do Roteador (Swap de URL):** Se todos os testes passarem, a mágica acontece. O balanceador de carga (ou o próprio Elastic Beanstalk) é reconfigurado para redirecionar todo o tráfego do ambiente Blue para o Green. Isso é uma troca de ponteiro, uma operação quase instantânea.
+4.  **Green se torna o novo Blue:** O ambiente Green agora é a nossa produção oficial. O ambiente Blue antigo fica em espera.
+
+**Fluxo de Rollback (Instantâneo):**
+
+Se, após a troca, a nova versão apresentar um bug que não foi pego nos testes, o rollback é trivial:
+* **Basta reconfigurar o roteador para apontar o tráfego de volta para o ambiente Blue**, que ainda está rodando a versão estável anterior. A reversão leva segundos e é completamente transparente para o usuário.
+
+**Vantagens:**
+* **Zero Downtime:** A troca entre ambientes é instantânea.
+* **Rollback Imediato:** Reverter uma versão problemática é uma operação de segundos e baixo risco.
+* **Testes Confiáveis:** Permite validar a nova versão em um ambiente de produção real antes de liberá-la.
+
+**Desvantagens:**
+* **Custo:** Manter dois ambientes de produção idênticos pode duplicar os custos de infraestrutura.
+* **Complexidade:** Requer uma configuração mais avançada do balanceador de carga e do pipeline de deploy.
+
 
 ### Estratégia Sugerida: Blue/Green Deployment
 
@@ -166,7 +195,7 @@ Para integrar um sistema de pagamentos como o Assas, a arquitetura seria:
 
 A documentação da API é gerada automaticamente e está disponível de forma interativa. Após iniciar o servidor, acesse o seguinte endpoint, utilizando o link gerado pelo Deploy na AWS:
 
-* **[http://http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs/](http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs)**
+* **[http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs/](http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs)**
 
 Nesta página, você pode visualizar todos os endpoints, modelos de dados e testar as requisições diretamente do seu navegador.
 para pegar seu token, use o superusuario :
