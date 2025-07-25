@@ -162,19 +162,24 @@ Para integrar um sistema de pagamentos como o Assas, a arquitetura seria:
     * Retorna a URL de pagamento para o cliente (frontend).
 * **Webhook:** Um endpoint para receber notificações do Assas (ex: pagamento confirmado). Este endpoint atualizaria o status do pagamento no nosso banco de dados.
 
-## 9. Documentação da API (Swagger)
+## 10. Documentação da API e Deploy(Swagger)
 
-A documentação da API é gerada automaticamente e está disponível de forma interativa. Após iniciar o servidor, acesse:
+A documentação da API é gerada automaticamente e está disponível de forma interativa. Após iniciar o servidor, acesse o seguinte endpoint, utilizando o link gerado pelo Deploy na AWS:
 
-* **[http://localhost:8000/api/docs/](http://localhost:8000/api/docs/)**
+* **[http://http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs/](http://lacrei-saude-api-env-2.eba-wkvpwp2y.sa-east-1.elasticbeanstalk.com/api/docs)**
 
 Nesta página, você pode visualizar todos os endpoints, modelos de dados e testar as requisições diretamente do seu navegador.
 para pegar seu token, use o superusuario :
 username = Lcuas
 password = Lguts123
 
+# 11. Pipeline CI/CD
 
-## 10. Testes Feitos
+O pipeline com o github actions foi feito para que toda vez que dessemos um "git push" para main, ele rodasse os testes e build de forma automática, além de fazer o Deploy.
+É possível ver o arquivo .yml na pasta [.github/workflows](https://github.com/Bytt13/API-Lacrei-Saude-Final/blob/main/.github/workflows/main.yml) do projeto
+
+
+## 12. Testes Feitos
 
 * **API TEST CASE:**
 * 
